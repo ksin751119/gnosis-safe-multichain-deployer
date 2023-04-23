@@ -1,4 +1,4 @@
-"""Entry point for project_name."""
+"""Entry point for gnosis_safe_multichain_deployer."""
 
 from .cli import main  # pragma: no cover
 
