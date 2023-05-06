@@ -4,6 +4,8 @@ import requests
 from web3 import Web3
 from .chains import supported_chains
 
+# Write a test case for
+
 
 def get_creation_transaction_hash(endpoint, safe_address, api_key):
     # Setup and send API
@@ -43,6 +45,22 @@ def send_creation_transaction_to_dst_chain(private_key, dst_chain, tx):
     print('Transaction sent on %s: %s' % (dst_chain["network"], tx_hash.hex()))
 
 
+def get_dst_chain_ids(value):
+    return [int(x.strip()) for x in value.split(',')]
+
+
+def verify_proxy_factory_address(src_chain_id, dst_chain_ids, tx_to):
+
+    if tx_to != supported_chains[src_chain_id]["proxy_factory"].lower():
+        raise Exception(
+            'Wrong factory address form source chain id: %s' % src_chain_id)
+
+    for dst_chain_id in dst_chain_ids:
+        if tx_to != supported_chains[dst_chain_id]["proxy_factory"].lower():
+            raise Exception(
+                'Wrong factory address form destination chain id: %s' % dst_chain_id)
+
+
 def main():  # pragma: no cover
     """
     The main function executes on commands:
@@ -50,23 +68,24 @@ def main():  # pragma: no cover
     """
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--src-chain-id', type=int, help='source chain ID')
-    parser.add_argument('--dst-chain-id', type=int,
-                        help='destination chain ID')
-    parser.add_argument('--address', type=str, help='wallet address')
-    parser.add_argument('--api-key', type=str, help='api key of etherscan')
+    parser.add_argument('--src-chain-id', type=int,
+                        help='source chain ID', required=True)
+    parser.add_argument('--dst-chain-ids', type=get_dst_chain_ids,
+                        help='destination chain IDs (comma separated)', required=True)
+    parser.add_argument('--address', type=str,
+                        help='wallet address', required=True)
+    parser.add_argument('--api-key', type=str,
+                        help='api key of etherscan', required=True)
     parser.add_argument('--private-key', type=str,
-                        help='private key for signing transactions')
+                        help='private key for signing transactions', required=True)
     args = parser.parse_args()
 
     src_chain_id = args.src_chain_id
-    dst_chain_id = args.dst_chain_id
+    dst_chain_ids = args.dst_chain_ids
     safe_address = args.address
     api_key = args.api_key
     private_key = args.private_key
-
     src_chain = supported_chains[src_chain_id]
-    dst_chain = supported_chains[dst_chain_id]
     w3 = Web3(Web3.HTTPProvider(src_chain["rpc"]))
 
     # Get safe vault creation data
@@ -75,12 +94,10 @@ def main():  # pragma: no cover
     tx = w3.eth.get_transaction(creation_txhash)
 
     # Check factory address
-    tx_to = tx.to.lower()
-    if tx_to != src_chain["proxy_factory"].lower():
-        raise Exception('Wrong factory address form src chain')
+    verify_proxy_factory_address(src_chain_id, dst_chain_ids, tx.to.lower())
 
-    if tx_to != dst_chain["proxy_factory"].lower():
-        raise Exception('Wrong factory address form dst chain')
-
-    # Send to dst chain
-    send_creation_transaction_to_dst_chain(private_key, dst_chain, tx)
+    # Send creation transaction to destination chains
+    for dst_chain_id in dst_chain_ids:
+        # Send to dst chain
+        send_creation_transaction_to_dst_chain(
+            private_key, supported_chains[dst_chain_id], tx)
