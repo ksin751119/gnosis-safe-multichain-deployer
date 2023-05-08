@@ -97,6 +97,7 @@ def main():  # pragma: no cover
     verify_proxy_factory_address(src_chain_id, dst_chain_ids, tx.to.lower())
 
     # Send creation transaction to destination chains
+    print('Safe Address: %s will deploy on multiple chains' % safe_address)
     for dst_chain_id in dst_chain_ids:
         # Send to dst chain
         send_creation_transaction_to_dst_chain(
