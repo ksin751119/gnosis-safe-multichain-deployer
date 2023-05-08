@@ -3,7 +3,7 @@ ethereum_chain = {
     "network": "ethereum",
     "rpc": "https://rpc.ankr.com/eth",
     "proxy_factory": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2",
-    "etherscan_endpoint": "https://api.etherscan.io/api"
+    "etherscan_endpoint": "https://api.etherscan.io/api",
 }
 
 
@@ -12,7 +12,7 @@ optimism_chain = {
     "network": "optimism",
     "rpc": "https://rpc.ankr.com/optimism",
     "proxy_factory": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC",
-    "etherscan_endpoint": "https://api-optimistic.etherscan.io/api"
+    "etherscan_endpoint": "https://api-optimistic.etherscan.io/api",
 }
 
 binance_smart_chain = {
@@ -20,7 +20,7 @@ binance_smart_chain = {
     "network": "binance smart chain",
     "rpc": "https://rpc.ankr.com/bsc",
     "proxy_factory": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2",
-    "etherscan_endpoint": "https://api.bscscan.com/api"
+    "etherscan_endpoint": "https://api.bscscan.com/api",
 }
 
 
@@ -29,7 +29,7 @@ gnosis_chain = {
     "network": "gnosis",
     "rpc": "https://rpc.gnosischain.com",
     "proxy_factory": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2",
-    "etherscan_endpoint": "https://api.gnosisscan.io/api"
+    "etherscan_endpoint": "https://api.gnosisscan.io/api",
 }
 
 polygon_chain = {
@@ -37,7 +37,7 @@ polygon_chain = {
     "network": "polygon",
     "rpc": "https://rpc.ankr.com/polygon",
     "proxy_factory": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2",
-    "etherscan_endpoint": "https://api.polygonscan.com/api"
+    "etherscan_endpoint": "https://api.polygonscan.com/api",
 }
 
 
@@ -46,8 +46,7 @@ arbitrum_chain = {
     "network": "arbitrum",
     "rpc": "https://rpc.ankr.com/arbitrum",
     "proxy_factory": "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2",
-    "etherscan_endpoint": "https://api.arbiscan.io/api"
-
+    "etherscan_endpoint": "https://api.arbiscan.io/api",
 }
 
 avalanche_chain = {
@@ -55,7 +54,7 @@ avalanche_chain = {
     "network": "avalanche",
     "rpc": "https://rpc.ankr.com/avalanche",
     "proxy_factory": "0xC22834581EbC8527d974F8a1c97E1bEA4EF910BC",
-    "etherscan_endpoint": "https://api.snowtrace.io/api"
+    "etherscan_endpoint": "https://api.snowtrace.io/api",
 }
 
 

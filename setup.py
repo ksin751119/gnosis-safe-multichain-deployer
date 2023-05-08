@@ -40,7 +40,9 @@ setup(
     packages=find_packages(exclude=["tests", ".github"]),
     install_requires=read_requirements("requirements.txt"),
     entry_points={
-        "console_scripts": ["gnosis-safe-multichain-deployer = gnosis_safe_multichain_deployer.__main__:main"]
+        "console_scripts": [
+            "gnosis-safe-multichain-deployer = gnosis_safe_multichain_deployer.__main__:main"
+        ]
     },
     extras_require={"test": read_requirements("requirements-test.txt")},
 )
