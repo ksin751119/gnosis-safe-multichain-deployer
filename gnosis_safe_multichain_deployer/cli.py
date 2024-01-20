@@ -35,6 +35,7 @@ def send_creation_transaction_to_dst_chain(private_key, dst_chain, tx):
 
     # Set transaction data
     transaction = {
+        "chainId": dst_chain['chain_id'],
         "to": receiver,
         "gas": int(tx.gas * 1.5),
         "gasPrice": w3.eth.gas_price,
